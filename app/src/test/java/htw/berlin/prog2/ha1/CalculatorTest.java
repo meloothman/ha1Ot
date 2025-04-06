@@ -90,5 +90,43 @@ class CalculatorTest {
 
 
     //TODO hier weitere Tests erstellen
+    //-3 x 4 ergibt -12
+    @Test
+    @DisplayName("should display results after multiplier to negative Numbers")
+    void testMultiplyNegativeNumbers() {
+
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(3);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("x");
+        calc.pressDigitKey(4);
+        calc.pressEqualsKey();
+        String expected = "-12";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+    }
+
+
+
+    //Addieren von -5 und -5 ergibt -10
+    @Test
+    @DisplayName("should display results after adding to negative Numbers")
+     void testNegativeNumbers()  {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressNegativeKey();
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressNegativeKey();
+        calc.pressEqualsKey();
+        String expected = "-10";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+
+    }
+
+
+
 }
 
