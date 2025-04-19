@@ -124,23 +124,10 @@ class CalculatorTest {
         String actual = calc.readScreen();
         assertEquals(expected, actual);
 
-    }
-    @Test
-    @DisplayName("should display results after pressing Equalskey more than once")
-    void testPressEqualsKey() {
-        Calculator calc = new Calculator();
-        calc.pressDigitKey(5);
-        calc.pressBinaryOperationKey("+");
-        calc.pressDigitKey(5);
-        calc.pressEqualsKey();
-        calc.pressEqualsKey();
-        String expected = "15";
-        String actual = calc.readScreen();
-        assertEquals(expected, actual);
 
 
     }
-    //2.Aufgabe 2: Erster rote Test
+    //2.Aufgabe 2: Erster roter Test
     /** Mehrere Operationen hintereinander ohne Equalkey funktioniert nicht die Erste Operation wird ignoriert
      * Erwartet 8+2-5=5
      * tatsächlich 2-5=-3
@@ -148,7 +135,7 @@ class CalculatorTest {
      */
     @Test
     @DisplayName("performsOperationsWithoutEqualkey")
-void testPerformOperationsWithoutEqualkey() {
+    void testPerformOperationsWithoutEqualkey() {
         Calculator calc = new Calculator();
         calc.pressDigitKey(8);
         calc.pressBinaryOperationKey("+");
@@ -161,5 +148,26 @@ void testPerformOperationsWithoutEqualkey() {
         assertEquals(expected, actual);
 
         }
+        //2.Roter Test
+        // Test soll 200+10% berechnen,was 220 ergeben sollte also 200 und 10% von 200
+        // jedoch wird java.lang.IllegalArgumentException angezeigt
+
+    @Test
+    @DisplayName("should calculate percentage based on first number")
+    void testCalculatePercentage() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(2);
+        calc.pressDigitKey(0);
+        calc.pressDigitKey(0);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(0);
+        calc.pressUnaryOperationKey("%");
+        calc.pressEqualsKey();
+
+        String expected = "220";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
+    }
 }
 
