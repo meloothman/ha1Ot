@@ -125,8 +125,41 @@ class CalculatorTest {
         assertEquals(expected, actual);
 
     }
+    @Test
+    @DisplayName("should display results after pressing Equalskey more than once")
+    void testPressEqualsKey() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(5);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+        calc.pressEqualsKey();
+        String expected = "15";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
 
 
+    }
+    //2.Aufgabe 2: Erster rote Test
+    /** Mehrere Operationen hintereinander ohne Equalkey funktioniert nicht die Erste Operation wird ignoriert
+     * Erwartet 8+2-5=5
+     * tatsächlich 2-5=-3
+     *
+     */
+    @Test
+    @DisplayName("performsOperationsWithoutEqualkey")
+void testPerformOperationsWithoutEqualkey() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressBinaryOperationKey("-");
+        calc.pressDigitKey(5);
+        calc.pressEqualsKey();
+        String expected = "5";
+        String actual = calc.readScreen();
+        assertEquals(expected, actual);
 
+        }
 }
 
