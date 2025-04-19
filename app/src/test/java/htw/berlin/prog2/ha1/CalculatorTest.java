@@ -149,8 +149,10 @@ class CalculatorTest {
 
         }
         //2.Roter Test
-        // Test soll 200+10% berechnen,was 220 ergeben sollte also 200 und 10% von 200
+        // Test soll 200+10% berechnen,was 220 ergeben sollte also 200 + 10% von 200
         // jedoch wird java.lang.IllegalArgumentException angezeigt
+        // Da % wurde als eigene Operation behandelt wurde.
+        //Fix Wenn eine binäre Operation aktiv ist wird der Prozentsatz vom ersten Wert berechnet
 
     @Test
     @DisplayName("should calculate percentage based on first number")

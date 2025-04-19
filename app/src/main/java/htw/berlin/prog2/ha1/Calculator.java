@@ -14,6 +14,7 @@ public class Calculator {
 
     private String latestOperation = "";
 
+
     /**
      * @return den aktuellen Bildschirminhalt als String
      */
@@ -48,6 +49,8 @@ public class Calculator {
         screen = "0";
         latestOperation = "";
         latestValue = 0.0;
+
+
     }
 
     /**
@@ -81,7 +84,15 @@ public class Calculator {
      * der Bildschirminhalt mit dem Ergebnis aktualisiert.
      * @param operation "√" für Quadratwurzel, "%" für Prozent, "1/x" für Inversion
      */
+    //Problem % wird als eigene Operation behandelt
     public void pressUnaryOperationKey(String operation) {
+        //Jetzt wird geprüft, ob vorher eine binäre Operation eingegeben wurde
+        if (operation.equals("%") && !latestOperation.isEmpty()) {
+            double percent = latestValue * Double.parseDouble(screen) / 100; //Prozentsatz vom ersten Wert berechnet
+            screen = Double.toString(percent);
+            return;
+        }
+
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
         var result = switch(operation) {
@@ -139,5 +150,7 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
+
+
     }
 }
