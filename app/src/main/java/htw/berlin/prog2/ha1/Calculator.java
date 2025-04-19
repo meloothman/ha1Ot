@@ -59,7 +59,17 @@ public class Calculator {
      * auf dem Bildschirm angezeigt. Falls hierbei eine Division durch Null auftritt, wird "Error" angezeigt.
      * @param operation "+" für Addition, "-" für Substraktion, "x" für Multiplikation, "/" für Division
      */
+     // Bugfix: Bei mehreren Operationen wurde die erste Rechenoperation ignoriert,
+     // weil latestValue und latestOperation einfach überschrieben wurden,
+     // ohne die vorherige Operation auszuführen.
+     // Lösung: Wenn bereits eine Operation existiert (latestOperation ist nicht leer)
+     // und eine neue eingegeben wird, wird zuerst pressEqualsKey() aufgerufen,
+     // um die vorherige Operation auszuführen.
+
     public void pressBinaryOperationKey(String operation)  {
+        if (!latestOperation.isEmpty() && !screen.equals("0")) {
+            pressEqualsKey(); // Führt die vorige Operation aus
+        }
         latestValue = Double.parseDouble(screen);
         latestOperation = operation;
     }
